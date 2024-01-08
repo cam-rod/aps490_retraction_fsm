@@ -1,11 +1,17 @@
-use crate::fsm::states::{
+use std::thread::sleep;
+use std::time::{Duration, Instant};
+
+use states::{
     Active, ContactDetected, Disabled, ErrorState, FatalError, Fsm, Resetting, Retracted,
     Retracting, Standby,
 };
-use crate::sensors::ActuatorDirection::{Extend, Retract};
-use crate::sensors::{startup_check, Actuator, CapPlates, DisableSwitch, Leds, ResetButton, Saw};
-use std::thread::sleep;
-use std::time::{Duration, Instant};
+
+use crate::sensors::DisableSwitchState::SystemDisabled;
+use crate::sensors::{
+    startup_check, Actuator, ActuatorDirection, CapPlates, DisableSwitch, Leds, ResetButton, Saw,
+};
+
+pub mod states;
 
 /// TODO remove when switching to interrupts
 #[derive(Debug)]
@@ -17,7 +23,7 @@ pub enum FsmHandle {
     Retracting(Fsm<Retracting>),
     Retracted(Fsm<Retracted>),
     Resetting(Fsm<Resetting>),
-    Error(Fsm<ErrorState>),
+    ErrorState(Fsm<ErrorState>),
     FatalError(Fsm<FatalError>),
 }
 
@@ -38,11 +44,12 @@ impl FsmHandle {
         p: &CapPlates,
     ) -> Self {
         match self {
-            Self::Disabled(fsm) => {
+            Self::Disabled(mut fsm) => {
                 if startup_check(d, r, a, l, p) {
                     Self::Standby(fsm.into())
                 } else {
-                    Self::Disabled(fsm)
+                    fsm.errors += 1;
+                    Self::ErrorState(fsm.into())
                 }
             }
             handle => handle,
@@ -82,11 +89,11 @@ impl FsmHandle {
         match self {
             Self::ContactDetected(mut fsm) => {
                 if plates.discharged() {
-                    if actuator.actuate(Extend) == Extend {
+                    if actuator.actuate(ActuatorDirection::Extend) == ActuatorDirection::Extend {
                         Self::Retracting(fsm.into())
                     } else {
                         fsm.errors += 1;
-                        Self::Error(fsm.into())
+                        Self::ErrorState(fsm.into())
                     }
                 } else {
                     Self::ContactDetected(fsm)
@@ -128,7 +135,7 @@ impl FsmHandle {
 
         eprintln!("Watchdog timeout while waiting for saw retraction");
         if let Self::Retracting(fsm) = self {
-            Self::Error(fsm.into())
+            Self::ErrorState(fsm.into())
         } else {
             panic!("Watchdog timeout outside of expected Retracting state!")
         }
@@ -138,11 +145,11 @@ impl FsmHandle {
         match self {
             Self::Retracted(mut fsm) => {
                 if reset_button.pressed {
-                    if actuator.actuate(Retract) == Retract {
+                    if actuator.actuate(ActuatorDirection::Retract) == ActuatorDirection::Retract {
                         Self::Resetting(fsm.into())
                     } else {
                         fsm.errors += 1;
-                        Self::Error(fsm.into())
+                        Self::ErrorState(fsm.into())
                     }
                 } else {
                     Self::Retracted(fsm)
@@ -170,75 +177,39 @@ impl FsmHandle {
 
         eprintln!("Watchdog timeout while waiting for saw reset");
         if let Self::Retracting(fsm) = self {
-            Self::Error(fsm.into())
+            Self::ErrorState(fsm.into())
         } else {
             panic!("Watchdog timeout outside of expected Reset state!")
         }
     }
-}
 
-pub mod states {
-    use retract_fsm_transition::transition_from;
-
-    #[derive(Debug)]
-    pub struct Fsm<S> {
-        pub errors: isize,
-        #[allow(dead_code)]
-        state: S,
-    }
-
-    impl Default for Fsm<Disabled> {
-        fn default() -> Self {
-            Self {
-                errors: 0,
-                state: Disabled,
+    /// This will fully lockout the system if 3 or more errors.
+    ///
+    /// The system cannot be re-enabled without a full power cycle. _Toggling [`DisableSwitch`] will not work._
+    pub fn error_lockout(self) -> Self {
+        match self {
+            Self::ErrorState(fsm) => {
+                if fsm.errors >= 3 {
+                    Self::FatalError(fsm.into())
+                } else {
+                    Self::ErrorState(fsm)
+                }
             }
+            _ => self,
         }
     }
 
-    /// System is disabled, and will not engage during operation
-    #[derive(Debug)]
-    pub struct Disabled;
-
-    /// System is enabled, saw is not currently running
-    #[derive(Debug)]
-    #[transition_from(Disabled)]
-    pub struct Standby;
-
-    /// System is enabled and looking for changes in conductance/current, saw is running
-    #[derive(Debug)]
-    #[transition_from(Standby, Resetting)]
-    pub struct Active;
-
-    /// Intermediate state, waiting minimum delay period for further confirmation
-    #[derive(Debug)]
-    #[transition_from(Active)]
-    pub struct ContactDetected;
-
-    /// Contact has been confirmed, begin retraction
-    #[derive(Debug)]
-    #[transition_from(ContactDetected)]
-    pub struct Retracting;
-
-    /// Saw blade has been retracted, position needs to be reset
-    #[derive(Debug)]
-    #[transition_from(Retracting)]
-    pub struct Retracted;
-
-    /// Saw blade is returning to running position
-    #[derive(Debug)]
-    #[transition_from(Retracted)]
-    pub struct Resetting;
-
-    /// An error was detected in a previous state. Reset is required to restore operation
-    #[derive(Debug)]
-    #[transition_from(Active, ContactDetected, Retracting, Retracted, Resetting)]
-    pub struct ErrorState;
-
-    /// Three errors in a row have occurred. System will not reset without a full power cycle
-    #[derive(Debug)]
-    #[transition_from(ErrorState)]
-    pub struct FatalError;
-
-    // Also want to include an error counter to determine number of errors, and force disable after 3 errors until full system reboot
+    /// The system can be safely disabled from [`Standby`] or either of the error states ([`ErrorState`] or [`FatalError`]).
+    pub fn disable_system(self, switch: &DisableSwitch) -> Self {
+        if switch.system == SystemDisabled {
+            match self {
+                Self::Standby(fsm) => Self::Disabled(fsm.into()),
+                Self::ErrorState(fsm) => Self::Disabled(fsm.into()),
+                Self::FatalError(fsm) => Self::Disabled(fsm.into()),
+                _ => self,
+            }
+        } else {
+            self
+        }
+    }
 }

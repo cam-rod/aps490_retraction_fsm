@@ -1,5 +1,5 @@
-use crate::fsm::FsmHandle;
-use crate::sensors::init_sensors;
+use fsm::FsmHandle;
+use sensors::init_sensors;
 
 pub mod fsm;
 pub mod sensors;
@@ -8,12 +8,14 @@ pub mod sensors;
 
 /// The main execution loop, non-interrupt edition.
 ///
-/// This function is missing a watchdog. For an example, see [`FsmHandle::retraction_complete`]
+/// This function is missing a watchdog. For an example, see [`FsmHandle::retraction_complete()`].
 pub fn main_loop() {
     let mut fsm = FsmHandle::default();
+    #[allow(unused_mut)]
     let (mut disable_switch, mut reset_button, mut actuator, mut leds, mut plates, saw) =
         init_sensors();
 
+    // TODO add regular, proper error checking
     loop {
         fsm = fsm.enable_system(&disable_switch, &reset_button, &actuator, &leds, &plates);
         fsm = fsm.activate_system(&saw);
@@ -26,5 +28,9 @@ pub fn main_loop() {
         fsm = fsm.retraction_complete(&actuator);
         fsm = fsm.reset_position(&reset_button, &mut actuator);
         fsm = fsm.reset_complete(&actuator);
+
+        // Error handling
+        fsm = fsm.error_lockout();
+        fsm = fsm.disable_system(&disable_switch);
     }
 }

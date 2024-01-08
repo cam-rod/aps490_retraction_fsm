@@ -1,3 +1,5 @@
+use DisableSwitchState::SystemDisabled;
+
 /// Creates all sensors
 pub fn init_sensors() -> (DisableSwitch, ResetButton, Actuator, Leds, CapPlates, Saw) {
     (
@@ -18,13 +20,24 @@ pub fn startup_check(
     leds: &Leds,
     plates: &CapPlates,
 ) -> bool {
-    disable_switch.state && !reset_button.pressed && actuator.test() && leds.test() && plates.test()
+    disable_switch.system == SystemDisabled
+        && !reset_button.pressed
+        && actuator.test()
+        && leds.test()
+        && plates.test()
 }
 
 /// Switch used to physically disable the system.
 #[derive(Default)]
 pub struct DisableSwitch {
-    state: bool,
+    pub system: DisableSwitchState,
+}
+
+#[derive(Default, Eq, PartialEq)]
+pub enum DisableSwitchState {
+    #[default]
+    SystemDisabled,
+    SystemEnablePermitted,
 }
 
 /// Used to reset the system after a detection event or from non-fatal [`ErrorState`](crate::fsm::states::ErrorState)
@@ -41,7 +54,7 @@ pub struct Actuator {
 }
 
 #[derive(Eq, PartialEq, Debug)]
-pub enum ActuatorDirection{
+pub enum ActuatorDirection {
     Extend,
     Retract,
     None,
@@ -56,13 +69,13 @@ impl Actuator {
     pub fn extended(&self) -> bool {
         self.position > 0.95
     }
-    
+
     pub fn retracted(&self) -> bool {
         self.position > 0.05
     }
-    
+
     /// Would issue a command to extend or retract the actuator
-    pub fn actuate(&self, direction: ActuatorDirection) -> ActuatorDirection{
+    pub fn actuate(&self, direction: ActuatorDirection) -> ActuatorDirection {
         // TODO actually issue a movement command
         direction
     }
@@ -98,7 +111,7 @@ impl CapPlates {
     fn test(&self) -> bool {
         todo!()
     }
-    
+
     /// Assumed capacitance dropping below 0.3 indicates contact
     pub fn discharged(&self) -> bool {
         self.capacitance < 0.3
