@@ -18,7 +18,7 @@ pub fn startup_check(
     leds: &Leds,
     plates: &CapPlates,
 ) -> bool {
-    disable_switch.state && !reset_button.state && actuator.test() && leds.test() && plates.test()
+    disable_switch.state && !reset_button.pressed && actuator.test() && leds.test() && plates.test()
 }
 
 /// Switch used to physically disable the system.
@@ -27,11 +27,11 @@ pub struct DisableSwitch {
     state: bool,
 }
 
-/// Used to reset the system after a detection event or from non-fatal [`Error`](crate::fsm::ErrorState)
+/// Used to reset the system after a detection event or from non-fatal [`ErrorState`](crate::fsm::states::ErrorState)
 /// state.
 #[derive(Default)]
 pub struct ResetButton {
-    state: bool,
+    pub pressed: bool,
 }
 
 /// Moves the saw blade away from the brain (ex. a linear actuator)
@@ -40,16 +40,36 @@ pub struct Actuator {
     position: f32,
 }
 
+#[derive(Eq, PartialEq, Debug)]
+pub enum ActuatorDirection{
+    Extend,
+    Retract,
+    None,
+}
+
 impl Actuator {
-    /// Check that actuator reports some valid measurement (ex. below 20% extended) in
-    /// [`Disabled`](crate::fsm::Disabled)
+    /// Check that actuator reports some valid measurement (ex. below 20% extended) in [`Disabled`](crate::fsm::states::Disabled)
     fn test(&self) -> bool {
         self.position < 0.2
+    }
+
+    pub fn extended(&self) -> bool {
+        self.position > 0.95
+    }
+    
+    pub fn retracted(&self) -> bool {
+        self.position > 0.05
+    }
+    
+    /// Would issue a command to extend or retract the actuator
+    pub fn actuate(&self, direction: ActuatorDirection) -> ActuatorDirection{
+        // TODO actually issue a movement command
+        direction
     }
 }
 
 /// Represents the state of RGB status LEDs. Only one LED can be active at any time, or none if the
-/// system is [`Disabled`](crate::fsm::Disabled).
+/// system is [`Disabled`](crate::fsm::states::Disabled).
 #[derive(Default)]
 pub enum Leds {
     Red,
@@ -77,6 +97,11 @@ impl CapPlates {
     /// Assuming capacitance test: briefly charge plates and check for capacitance
     fn test(&self) -> bool {
         todo!()
+    }
+    
+    /// Assumed capacitance dropping below 0.3 indicates contact
+    pub fn discharged(&self) -> bool {
+        self.capacitance < 0.3
     }
 }
 

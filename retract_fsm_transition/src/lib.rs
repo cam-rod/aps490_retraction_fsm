@@ -1,45 +1,49 @@
+#![doc(html_playground_url = "https://play.rust-lang.org/")]
+
 use proc_macro2::{Ident, TokenStream, TokenTree};
 use quote::{quote, ToTokens};
 use syn::{parse_macro_input, ItemStruct};
 
 /// Implements [`From`] for the given old state, to permit a state transition.
-/// 
+///
 /// Requires the `Fsm` class as defined below:
-/// 
+///
 /// ```no_run
 /// pub struct Fsm<S> {
 ///     errors: isize,
 ///     state: S,
 /// }
 /// ```
-/// 
+///
 /// ## Examples
 /// ```
 /// use crate::retract_fsm_transition::transition_from;
-/// 
+///
 /// # #[derive(Debug, Eq, PartialEq)]
 /// # pub struct Fsm<S> {
 /// #     errors: isize,
 /// #     pub state: S,
 /// # }
-/// # 
+/// #
 /// # #[derive(Debug, Eq, PartialEq)]
 /// pub struct Standby;
-/// 
-/// # #[derive(Debug, Eq, PartialEq)] 
+///
+/// # #[derive(Debug, Eq, PartialEq)]
 /// #[transition_from(Standby)]
 /// pub struct Active;
-/// 
+///
 /// fn main() {
 ///     let fsm = Fsm {
 ///         errors: 0,
-///         state: Standby 
+///         state: Standby
 ///     };
 ///     let fsm2: Fsm<Active> = fsm.into();
 ///     assert_eq!(fsm2.state, Active);
 /// }
 /// ```
-/// 
+///
+/// This example will not compile, as [`From`] was not implemented for
+///
 /// ```compile_fail
 /// # use crate::retract_fsm_transition::transition_from;
 /// #
@@ -48,18 +52,18 @@ use syn::{parse_macro_input, ItemStruct};
 /// #     errors: isize,
 /// #     pub state: S,
 /// # }
-/// # 
+/// #
 /// # #[derive(Debug, Eq, PartialEq)]
 /// pub struct Standby;
 ///
-/// # #[derive(Debug, Eq, PartialEq)] 
+/// # #[derive(Debug, Eq, PartialEq)]
 /// #[transition_from(Standby)]
 /// pub struct Active;
-/// 
+///
 /// fn main() {
 ///     let fsm = Fsm {
 ///         errors: 0,
-///         state: Active 
+///         state: Active
 ///     };
 ///     let fsm2: Fsm<Standby> = fsm.into();
 ///     assert_eq!(fsm2.state, Standby);
@@ -86,9 +90,17 @@ pub fn transition_from(
                     }
                 }
             }
+            impl From<&Fsm<#old>> for Fsm<#new_state> {
+                fn from(value: &Fsm<#old>) -> Self {
+                    Self {
+                        errors: value.errors,
+                        state: #new_state,
+                    }
+                }
+            }
         ))
     }
-    
+
     from_impls.into()
 }
 
