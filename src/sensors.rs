@@ -1,31 +1,86 @@
-// TODO consider enums for each sensor type
+/// Creates all sensors
+pub fn init_sensors() -> (DisableSwitch, ResetButton, Actuator, Leds, CapPlates, Saw) {
+    (
+        DisableSwitch::default(),
+        ResetButton::default(),
+        Actuator::default(),
+        Leds::default(),
+        CapPlates::default(),
+        Saw::default(),
+    )
+}
 
 /// Performs necessary checks for system initialization
-pub fn startup_check() -> bool {
-    is_disable_switch() && !is_reset_button() && actuator_test() && led_test() && plates_test() 
+pub fn startup_check(
+    disable_switch: &DisableSwitch,
+    reset_button: &ResetButton,
+    actuator: &Actuator,
+    leds: &Leds,
+    plates: &CapPlates,
+) -> bool {
+    disable_switch.state && !reset_button.state && actuator.test() && leds.test() && plates.test()
 }
 
-fn is_disable_switch() -> bool {
-    todo!()
+/// Switch used to physically disable the system.
+#[derive(Default)]
+pub struct DisableSwitch {
+    state: bool,
 }
 
-/// Returns `true` if pressed
-fn is_reset_button() -> bool {
-    todo!()
+/// Used to reset the system after a detection event or from non-fatal [`Error`](crate::fsm::ErrorState)
+/// state.
+#[derive(Default)]
+pub struct ResetButton {
+    state: bool,
 }
 
-/// Check that actuator reports some valid measurement (ex. below 20% extended) in [`Disabled`](crate::fsm::Disabled)
-fn actuator_test() -> bool {
-    todo!()
+/// Moves the saw blade away from the brain (ex. a linear actuator)
+#[derive(Default)]
+pub struct Actuator {
+    position: f32,
 }
 
-/// Briefly enable LEDs and check output voltage to check that they are operational
-fn led_test() -> bool {
-    // TODO Enable LED and measure low-voltage rail to see if they power on, then disable
-    todo!()
+impl Actuator {
+    /// Check that actuator reports some valid measurement (ex. below 20% extended) in
+    /// [`Disabled`](crate::fsm::Disabled)
+    fn test(&self) -> bool {
+        self.position < 0.2
+    }
 }
 
-/// Assuming capacitance test: briefly charge plates and check for capacitance
-fn plates_test() -> bool {
-    todo!()
+/// Represents the state of RGB status LEDs. Only one LED can be active at any time, or none if the
+/// system is [`Disabled`](crate::fsm::Disabled).
+#[derive(Default)]
+pub enum Leds {
+    Red,
+    Yellow,
+    Green,
+    #[default]
+    Off,
+}
+
+impl Leds {
+    /// Briefly enable LEDs and check output voltage to check that they are operational
+    fn test(&self) -> bool {
+        // TODO Enable LED and measure low-voltage rail to see if they power on, then disable
+        todo!()
+    }
+}
+
+/// Measures capacitance of saw blade
+#[derive(Default)]
+pub struct CapPlates {
+    capacitance: f32,
+}
+
+impl CapPlates {
+    /// Assuming capacitance test: briefly charge plates and check for capacitance
+    fn test(&self) -> bool {
+        todo!()
+    }
+}
+
+#[derive(Default)]
+pub struct Saw {
+    pub running: bool,
 }
