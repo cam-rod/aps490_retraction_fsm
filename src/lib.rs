@@ -17,20 +17,20 @@ pub fn main_loop() {
 
     // TODO add regular, proper error checking
     loop {
-        fsm = fsm.enable_system(&disable_switch, &reset_button, &actuator, &leds, &plates);
+        fsm = fsm.enable_system(&disable_switch, &reset_button, &actuator, &mut leds, &plates);
         fsm = fsm.activate_system(&saw);
 
         // Capacitance test
         fsm = fsm.first_contact_detection(&plates);
-        fsm = fsm.second_contact_detection(&plates, &mut actuator);
+        fsm = fsm.second_contact_detection(&plates, &mut actuator, &mut leds);
 
         // Retraction and reset
-        fsm = fsm.retraction_complete(&actuator);
-        fsm = fsm.reset_position(&reset_button, &mut actuator);
-        fsm = fsm.reset_complete(&actuator);
+        fsm = fsm.retraction_complete(&actuator, &mut leds);
+        fsm = fsm.reset_position(&reset_button, &mut actuator, &mut leds);
+        fsm = fsm.reset_complete(&actuator, &mut leds);
 
         // Error handling
         fsm = fsm.error_lockout();
-        fsm = fsm.disable_system(&disable_switch);
+        fsm = fsm.disable_system(&disable_switch, &mut leds);
     }
 }

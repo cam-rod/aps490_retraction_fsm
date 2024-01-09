@@ -40,15 +40,17 @@ impl FsmHandle {
         d: &DisableSwitch,
         r: &ResetButton,
         a: &Actuator,
-        l: &Leds,
+        l: &mut Leds,
         p: &CapPlates,
     ) -> Self {
         match self {
             Self::Disabled(mut fsm) => {
                 if startup_check(d, r, a, l, p) {
+                    *l = Leds::Green;
                     Self::Standby(fsm.into())
                 } else {
                     fsm.errors += 1;
+                    *l = Leds::Red;
                     Self::ErrorState(fsm.into())
                 }
             }
@@ -84,15 +86,17 @@ impl FsmHandle {
         }
     }
 
-    pub fn second_contact_detection(self, plates: &CapPlates, actuator: &mut Actuator) -> Self {
+    pub fn second_contact_detection(self, plates: &CapPlates, actuator: &mut Actuator, leds: &mut Leds) -> Self {
         sleep(Duration::from_millis(300));
         match self {
             Self::ContactDetected(mut fsm) => {
                 if plates.discharged() {
                     if actuator.actuate(ActuatorDirection::Extend) == ActuatorDirection::Extend {
+                        *leds = Leds::Yellow;
                         Self::Retracting(fsm.into())
                     } else {
                         fsm.errors += 1;
+                        *leds = Leds::Red;
                         Self::ErrorState(fsm.into())
                     }
                 } else {
@@ -118,7 +122,7 @@ impl FsmHandle {
     /// }
     /// println!("woof!")
     /// ```
-    pub fn retraction_complete(self, actuator: &Actuator) -> Self {
+    pub fn retraction_complete(self, actuator: &Actuator, leds: &mut Leds) -> Self {
         let watchdog = Instant::now();
         while watchdog.elapsed() < Duration::from_secs(5) {
             match &self {
@@ -134,6 +138,7 @@ impl FsmHandle {
         }
 
         eprintln!("Watchdog timeout while waiting for saw retraction");
+        *leds = Leds::Red;
         if let Self::Retracting(fsm) = self {
             Self::ErrorState(fsm.into())
         } else {
@@ -141,7 +146,7 @@ impl FsmHandle {
         }
     }
 
-    pub fn reset_position(self, reset_button: &ResetButton, actuator: &mut Actuator) -> Self {
+    pub fn reset_position(self, reset_button: &ResetButton, actuator: &mut Actuator, leds: &mut Leds) -> Self {
         match self {
             Self::Retracted(mut fsm) => {
                 if reset_button.pressed {
@@ -149,6 +154,7 @@ impl FsmHandle {
                         Self::Resetting(fsm.into())
                     } else {
                         fsm.errors += 1;
+                        *leds = Leds::Red;
                         Self::ErrorState(fsm.into())
                     }
                 } else {
@@ -160,12 +166,13 @@ impl FsmHandle {
     }
 
     /// Functionally identical to [`FsmHandle::retraction_complete()`].
-    pub fn reset_complete(self, actuator: &Actuator) -> Self {
+    pub fn reset_complete(self, actuator: &Actuator, leds: &mut Leds) -> Self {
         let watchdog = Instant::now();
         while watchdog.elapsed() < Duration::from_secs(5) {
             match &self {
                 Self::Resetting(fsm) => {
                     if actuator.retracted() {
+                        *leds = Leds::Green;
                         return Self::Active(fsm.into());
                     } else {
                         sleep(Duration::from_millis(200));
@@ -176,6 +183,7 @@ impl FsmHandle {
         }
 
         eprintln!("Watchdog timeout while waiting for saw reset");
+        *leds = Leds::Red;
         if let Self::Retracting(fsm) = self {
             Self::ErrorState(fsm.into())
         } else {
@@ -200,12 +208,21 @@ impl FsmHandle {
     }
 
     /// The system can be safely disabled from [`Standby`] or either of the error states ([`ErrorState`] or [`FatalError`]).
-    pub fn disable_system(self, switch: &DisableSwitch) -> Self {
+    pub fn disable_system(self, switch: &DisableSwitch, leds: &mut Leds) -> Self {
         if switch.system == SystemDisabled {
             match self {
-                Self::Standby(fsm) => Self::Disabled(fsm.into()),
-                Self::ErrorState(fsm) => Self::Disabled(fsm.into()),
-                Self::FatalError(fsm) => Self::Disabled(fsm.into()),
+                Self::Standby(fsm) => {
+                    *leds = Leds::Off;
+                    Self::Disabled(fsm.into())
+                },
+                Self::ErrorState(fsm) => {
+                    *leds = Leds::Off;
+                    Self::Disabled(fsm.into())
+                },
+                Self::FatalError(fsm) => {
+                    *leds = Leds::Off;
+                    Self::Disabled(fsm.into())
+                },
                 _ => self,
             }
         } else {
