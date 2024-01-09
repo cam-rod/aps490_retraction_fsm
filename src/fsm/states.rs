@@ -22,6 +22,9 @@ impl Default for Fsm<Disabled> {
 pub struct Disabled;
 
 /// System is enabled, saw is not currently running
+///
+/// TODO entering this state must require the retraction mechanism to return to sub-5% position (regular operation).
+/// Failure to reach within a watchdog timer triggers an error.
 #[derive(Debug)]
 #[transition_from(Disabled)]
 pub struct Standby;
