@@ -1,0 +1,15 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 49d591c0-ad9e-4653-b118-089f865bc245)
+
+  (paper "A4")
+
+  (title_block
+    (title "Detection Circuit")
+    (company "PFPU2")
+  )
+
+  (lib_symbols
+  )
+
+)

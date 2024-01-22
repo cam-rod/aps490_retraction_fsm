@@ -114,6 +114,9 @@
       (project "MB1180"
         (path "/a2ef7e76-e1f0-4b38-892b-f0f108e628a0/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa" (page "3"))
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa" (page "3"))
+      )
     )
   )
 
@@ -133,6 +136,9 @@
       )
       (project "MB1180"
         (path "/a2ef7e76-e1f0-4b38-892b-f0f108e628a0/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa" (page "2"))
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa" (page "2"))
       )
     )
   )

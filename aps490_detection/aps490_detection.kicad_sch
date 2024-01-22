@@ -13,6 +13,43 @@
   )
 
 
+  (sheet (at 22.86 156.21) (size 118.11 30.48) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa)
+    (property "Sheetname" "U_MB1180_NUCLEO32" (at 22.86 155.4984 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "../MB1180/MB1180-SchDoc.kicad_sch" (at 22.86 187.2746 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "MB1180"
+        (path "/a2ef7e76-e1f0-4b38-892b-f0f108e628a0" (page "2"))
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1" (page "#"))
+      )
+    )
+  )
+
+  (sheet (at 96.52 63.5) (size 92.71 57.15) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid bad03448-3ebc-42d0-be48-dd19294cc20c)
+    (property "Sheetname" "Detection_Circuit" (at 96.52 62.7884 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "detection_circuit.kicad_sch" (at 96.52 121.2346 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1" (page "5"))
+      )
+    )
+  )
+
   (sheet_instances
     (path "/" (page "1"))
   )

@@ -2828,6 +2828,11 @@
           (reference "SB5") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
+        )
+      )
     )
   )
 
@@ -2862,6 +2867,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "C24") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "C?") (unit 1)
         )
       )
     )
@@ -2900,6 +2910,11 @@
           (reference "L1") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "L?") (unit 1)
+        )
+      )
     )
   )
 
@@ -2934,6 +2949,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "R21") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "R?") (unit 1)
         )
       )
     )
@@ -2974,6 +2994,11 @@
           (reference "C11") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "C?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3008,6 +3033,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "SB18") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
         )
       )
     )
@@ -3046,6 +3076,11 @@
           (reference "SB16") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3080,6 +3115,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "JP1") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "JP?") (unit 1)
         )
       )
     )
@@ -3118,6 +3158,11 @@
           (reference "C7") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "C?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3152,6 +3197,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "SB17") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
         )
       )
     )
@@ -3195,6 +3245,11 @@
           (reference "U3") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "U?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3233,6 +3288,11 @@
           (reference "U6") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "U?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3267,6 +3327,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "SB4") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
         )
       )
     )
@@ -3305,6 +3370,11 @@
           (reference "SB14") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3339,6 +3409,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "X1") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "X?") (unit 1)
         )
       )
     )
@@ -3377,6 +3452,11 @@
           (reference "B1") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "B?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3411,6 +3491,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "D4") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "D?") (unit 1)
         )
       )
     )
@@ -3449,6 +3534,11 @@
           (reference "C14") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "C?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3483,6 +3573,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "R22") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "R?") (unit 1)
         )
       )
     )
@@ -3523,6 +3618,11 @@
           (reference "C12") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "C?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3557,6 +3657,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "LD2") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "LD?") (unit 1)
         )
       )
     )
@@ -3595,6 +3700,11 @@
           (reference "C10") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "C?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3629,6 +3739,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "C8") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "C?") (unit 1)
         )
       )
     )
@@ -3667,6 +3782,11 @@
           (reference "C9") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "C?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3701,6 +3821,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "D3") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "D?") (unit 1)
         )
       )
     )
@@ -3739,6 +3864,11 @@
           (reference "C25") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "C?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3773,6 +3903,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "C22") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "C?") (unit 1)
         )
       )
     )
@@ -3811,6 +3946,11 @@
           (reference "SB15") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3845,6 +3985,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "R23") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "R?") (unit 1)
         )
       )
     )
@@ -3883,6 +4028,11 @@
           (reference "LD3") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "LD?") (unit 1)
+        )
+      )
     )
   )
 
@@ -3919,6 +4069,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "C13") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "C?") (unit 1)
         )
       )
     )
@@ -3970,6 +4125,11 @@
           (reference "CN4") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "CN?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4019,6 +4179,11 @@
           (reference "CN3") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "CN?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4053,6 +4218,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "SB12") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
         )
       )
     )
@@ -4121,6 +4291,11 @@
           (reference "U2") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "U?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4155,6 +4330,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "SB11") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
         )
       )
     )
@@ -4193,6 +4373,11 @@
           (reference "SB6") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4227,6 +4412,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "SB10") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
         )
       )
     )
@@ -4265,6 +4455,11 @@
           (reference "SB8") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4299,6 +4494,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "SB13") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
         )
       )
     )
@@ -4337,6 +4537,11 @@
           (reference "SB7") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "SB?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4373,6 +4578,11 @@
           (reference "C23") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "C?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4407,6 +4617,11 @@
           (reference "VO") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "VO?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4439,6 +4654,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "U5V_ST_LINK") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "U5V_ST_LINK?") (unit 1)
         )
       )
     )
@@ -4476,6 +4696,11 @@
           (reference "GND_16") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4508,6 +4733,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "E5V_2") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "E5V_?") (unit 1)
         )
       )
     )
@@ -4545,6 +4775,11 @@
           (reference "GND_15") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4580,6 +4815,11 @@
           (reference "VDD_3") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "VDD_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4612,6 +4852,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "+5V_2") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "+5V_?") (unit 1)
         )
       )
     )
@@ -4649,6 +4894,11 @@
           (reference "GND_14") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4681,6 +4931,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "+3V3_2") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "+3V3_?") (unit 1)
         )
       )
     )
@@ -4718,6 +4973,11 @@
           (reference "GND_13") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4750,6 +5010,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "E5V") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "E5V?") (unit 1)
         )
       )
     )
@@ -4787,6 +5052,11 @@
           (reference "GND_12") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4822,6 +5092,11 @@
           (reference "GND_11") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4854,6 +5129,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "VIN_2") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "VIN_?") (unit 1)
         )
       )
     )
@@ -4891,6 +5171,11 @@
           (reference "AVDD_3") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "AVDD_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4924,6 +5209,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "GND_10") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
         )
       )
     )
@@ -4960,6 +5250,11 @@
           (reference "VIN") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "VIN?") (unit 1)
+        )
+      )
     )
   )
 
@@ -4994,6 +5289,11 @@
           (reference "+5V") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "+5V?") (unit 1)
+        )
+      )
     )
   )
 
@@ -5026,6 +5326,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "+3V3") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "+3V?") (unit 1)
         )
       )
     )
@@ -5063,6 +5368,11 @@
           (reference "GND_9") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -5096,6 +5406,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "AVDD_2") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "AVDD_?") (unit 1)
         )
       )
     )
@@ -5133,6 +5448,11 @@
           (reference "GND_8") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -5166,6 +5486,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "GND_7") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
         )
       )
     )
@@ -5203,6 +5528,11 @@
           (reference "GND_6") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -5236,6 +5566,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "VDD_2") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "VDD_?") (unit 1)
         )
       )
     )
@@ -5273,6 +5608,11 @@
           (reference "AVDD") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "AVDD?") (unit 1)
+        )
+      )
     )
   )
 
@@ -5306,6 +5646,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "VDD") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "VDD?") (unit 1)
         )
       )
     )
@@ -5343,6 +5688,11 @@
           (reference "GND_5") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -5376,6 +5726,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "GND_4") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
         )
       )
     )
@@ -5413,6 +5768,11 @@
           (reference "GND_3") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -5448,6 +5808,11 @@
           (reference "GND_2") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND_?") (unit 1)
+        )
+      )
     )
   )
 
@@ -5481,6 +5846,11 @@
       (project "MCU_32-SchDoc"
         (path "/a4f7cf95-332b-4060-bf8a-c65e546394a9"
           (reference "GND") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa/ec831406-8b2d-49e7-b20b-847c7aefc7ff"
+          (reference "GND?") (unit 1)
         )
       )
     )

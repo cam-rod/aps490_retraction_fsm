@@ -326,6 +326,22 @@
     [
       "e118c919-9296-4265-a7f4-7c13f94290b1",
       ""
+    ],
+    [
+      "ec831406-8b2d-49e7-b20b-847c7aefc7ff",
+      "U_MCU_32"
+    ],
+    [
+      "6fedc888-40fd-439b-a002-6f82a97969cb",
+      "U_ST_LINK_V2-1"
+    ],
+    [
+      "bad03448-3ebc-42d0-be48-dd19294cc20c",
+      "Detection_Circuit"
+    ],
+    [
+      "00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa",
+      "U_MB1180_NUCLEO32"
     ]
   ],
   "text_variables": {}
