@@ -1,0 +1,8 @@
+(module "DFN6_0R95_3x3_TP" (layer F.Cu) (tedit 5B0D3C36)
+  (arc (start -1.59041 1.27000) (end -1.59041 1.27000) (mid -1.70759 1.27000) (layer F.SilkS) (width 0.029295) )
+  (fp_line (start 1.42240 -1.30002) (end 1.50002 -1.30002) (layer F.SilkS) (width 0.127))
+  (fp_line (start 1.50002 1.30002) (end 1.50002 -1.30002) (layer F.SilkS) (width 0.127))
+  (fp_line (start 1.42240 1.30002) (end 1.50002 1.30002) (layer F.SilkS) (width 0.127))
+  (fp_line (start -1.50002 -1.30002) (end -1.39700 -1.30002) (layer F.SilkS) (width 0.127))
+  (fp_line (start -1.50002 0.80000) (end -1.50002 -1.30002) (layer F.SilkS) (width 0.127))
+)

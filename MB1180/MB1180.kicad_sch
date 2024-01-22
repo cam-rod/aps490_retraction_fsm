@@ -1,0 +1,31 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid a2ef7e76-e1f0-4b38-892b-f0f108e628a0)
+
+  (paper "A4")
+
+  (lib_symbols
+  )
+
+
+  (sheet (at 53.34 48.26) (size 69.85 35.56) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 00f0ac30-62bb-4c87-b3a8-7dfdae3a1eaa)
+    (property "Sheetname" "U_MB1180_NUCLEO32" (at 53.34 47.5484 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "MB1180-SchDoc.kicad_sch" (at 53.34 84.4046 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "MB1180"
+        (path "/a2ef7e76-e1f0-4b38-892b-f0f108e628a0" (page "2"))
+      )
+    )
+  )
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)

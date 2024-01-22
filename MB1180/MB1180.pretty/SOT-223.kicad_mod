@@ -1,0 +1,6 @@
+(module "SOT-223" (layer F.Cu) (tedit 5B0D3C36)
+  (fp_line (start -1.57480 3.78460) (end -1.57480 -3.58140) (layer F.SilkS) (width 0.1524))
+  (fp_line (start -1.57480 -3.58140) (end 1.21920 -3.58140) (layer F.SilkS) (width 0.1524))
+  (fp_line (start 1.21920 3.78460) (end 1.21920 -3.58140) (layer F.SilkS) (width 0.1524))
+  (fp_line (start -1.57480 3.78460) (end 1.21920 3.78460) (layer F.SilkS) (width 0.1524))
+)

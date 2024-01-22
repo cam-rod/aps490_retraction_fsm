@@ -1,0 +1,4 @@
+(module "XTAL_2SM_3R2X1R5" (layer F.Cu) (tedit 5B0D3C36)
+  (fp_line (start -0.27940 -0.91440) (end 0.27940 -0.91440) (layer F.SilkS) (width 0.2032))
+  (fp_line (start -0.27940 0.91440) (end 0.27940 0.91440) (layer F.SilkS) (width 0.2032))
+)

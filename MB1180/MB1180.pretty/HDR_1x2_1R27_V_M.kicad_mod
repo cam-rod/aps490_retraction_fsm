@@ -1,0 +1,6 @@
+(module "HDR_1x2_1R27_V_M" (layer F.Cu) (tedit 5B0D3C36)
+  (fp_line (start -1.27000 -1.27000) (end 1.27000 -1.27000) (layer Dwgs.User) (width 0.127))
+  (fp_line (start 1.27000 1.27000) (end 1.27000 -1.27000) (layer Dwgs.User) (width 0.127))
+  (fp_line (start -1.27000 1.27000) (end 1.27000 1.27000) (layer Dwgs.User) (width 0.127))
+  (fp_line (start -1.27000 1.27000) (end -1.27000 -1.27000) (layer Dwgs.User) (width 0.127))
+)

@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "ST_LINK_V2-1-SCHDOC-rescue")(type "KiCad")(uri "${KIPRJMOD}/ST_LINK_V2-1-SCHDOC-rescue.kicad_sym")(options "")(descr ""))
+  (lib (name "MCU_32-SchDoc-rescue")(type "KiCad")(uri "${KIPRJMOD}/MCU_32-SchDoc-rescue.kicad_sym")(options "")(descr ""))
+)
