@@ -1,0 +1,12 @@
+[package]
+name = "concept"
+authors.workspace = true
+description = "Concept for design"
+edition.workspace = true
+license.workspace = true
+readme.workspace = true
+repository.workspace = true
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+retract_fsm_transition = { path = "retract_fsm_transition" }
