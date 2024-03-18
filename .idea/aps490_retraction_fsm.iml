@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/concept/retract_fsm_transition/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/concept/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/pico_test/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
