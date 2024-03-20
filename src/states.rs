@@ -1,9 +1,10 @@
 //! FSM and transitions for the detection mechanism.
 
+use crate::components::{DisableSwitch, SignalGenPwm, StatusLeds};
 use embedded_hal::digital::PinState;
-use crate::components::{DisableSwitch, StatusLeds};
 use rp2040_hal::gpio::Pins;
 use rp2040_hal::pac::{IO_BANK0, PADS_BANK0, RESETS};
+use rp2040_hal::pwm::{FreeRunning, Pwm4, Slice};
 use rp2040_hal::sio::SioGpioBank0;
 
 pub const SYS_CLOCK_FREQ: u32 = 12_000_000;
@@ -19,6 +20,7 @@ pub trait AlertState {}
 pub struct Startup {
     disable_switch: Option<DisableSwitch>,
     status_leds: Option<StatusLeds>,
+    signal_gen: Option<SignalGenPwm>,
 }
 impl InitState for Startup {}
 impl AlertState for Startup {}
@@ -48,14 +50,21 @@ impl Startup {
         Self {
             disable_switch: None,
             status_leds: None,
+            signal_gen: None,
         }
     }
 
-    // Stores components in FSM
-    pub fn init_components(&mut self, disable_switch: DisableSwitch, status_leds: StatusLeds) {
+    // Stores disable switch, LEDs, and signal gen pins in FSM
+    pub fn init_components(
+        &mut self,
+        disable_switch: DisableSwitch,
+        status_leds: StatusLeds,
+        signal_gen: SignalGenPwm,
+    ) {
         self.disable_switch = Some(disable_switch);
         // Warning status while system is initialized
         self.status_leds = Some(status_leds);
+        self.signal_gen = Some(signal_gen);
     }
 }
 

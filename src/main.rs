@@ -12,13 +12,17 @@ use defmt_rtt as _;
 #[allow(unused_imports)]
 use panic_probe as _;
 
-use crate::components::StatusLeds;
+use crate::components::{SignalGenPwm, StatusLeds};
 use rp2040_hal::gpio::Pins;
+use rp2040_hal::pwm::Slices;
 use rp2040_hal::{
     clocks::init_clocks_and_plls, entry, fugit::RateExtU32, pac, prelude::*, sio::Sio,
     watchdog::Watchdog,
 };
 use states::{Startup, SYS_CLOCK_FREQ};
+
+/// Target 200 kHz (2x freq) for signal generation
+const TARGET_TOP_FREQ_KHZ: u16 = 200;
 
 #[entry]
 fn main() -> ! {
@@ -54,15 +58,22 @@ fn main() -> ! {
             )
         });
 
+    // Initialize components
     let pins = Pins::new(
         pac.IO_BANK0,
         pac.PADS_BANK0,
         sio.gpio_bank0,
         &mut pac.RESETS,
     );
+    let mut pwm_slices = Slices::new(pac.PWM, &mut pac.RESETS);
+    pwm_slices
+        .pwm3
+        .set_top(clocks.system_clock.freq().to_kHz() as u16 / TARGET_TOP_FREQ_KHZ);
+
     startup_fsm.init_components(
         pins.gpio9.into_pull_down_input(),
         StatusLeds::init(pins.gpio6, pins.gpio7, pins.gpio8),
+        SignalGenPwm::init(pwm_slices.pwm3.channel_a, pins.gpio22),
     );
     todo!();
 
