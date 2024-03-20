@@ -12,12 +12,12 @@ use defmt_rtt as _;
 #[allow(unused_imports)]
 use panic_probe as _;
 
-use crate::components::Components;
+use crate::components::StatusLeds;
+use rp2040_hal::gpio::Pins;
 use rp2040_hal::{
     clocks::init_clocks_and_plls, entry, fugit::RateExtU32, pac, prelude::*, sio::Sio,
     watchdog::Watchdog,
 };
-use rp2040_hal::gpio::Pins;
 use states::{Startup, SYS_CLOCK_FREQ};
 
 #[entry]
@@ -54,13 +54,16 @@ fn main() -> ! {
             )
         });
 
-    let pins =  Pins::new(
+    let pins = Pins::new(
         pac.IO_BANK0,
         pac.PADS_BANK0,
         sio.gpio_bank0,
         &mut pac.RESETS,
     );
-    startup_fsm.init_components(pins);
+    startup_fsm.init_components(
+        pins.gpio9.into_pull_down_input(),
+        StatusLeds::init(pins.gpio6, pins.gpio7, pins.gpio8),
+    );
     todo!();
 
     // This is the correct pin on the Raspberry Pico board. On other boards, even if they have an
@@ -72,7 +75,6 @@ fn main() -> ! {
     // If you have a Pico W and want to toggle a LED with a simple GPIO output pin, you can connect an external
     // LED to one of the GPIO pins, and reference that pin here. Don't forget adding an appropriate resistor
     // in series with the LED.
-    
 }
 
 // End of file
