@@ -1,16 +1,17 @@
-//! Blinks the LED on a Pico board
-//!
-//! This will blink an LED attached to GP25, which is the pin the Pico uses for the on-board LED.
+//! Provides contact detection with a high-conductivity surface (such as brain tissue)
+//! for an autopsy saw.
 #![no_std]
 #![no_main]
 
-use defmt::info;
+use defmt::{info, warn};
 #[allow(unused_imports)]
 use defmt_rtt as _;
 use embedded_hal::digital::OutputPin;
 #[allow(unused_imports)]
 use panic_probe as _;
 
+use aps490_retraction_fsm::init_components;
+use aps490_retraction_fsm::states::{Startup, SYS_CLOCK_FREQ};
 use rp2040_hal::{
     clocks::{init_clocks_and_plls, Clock},
     entry,
@@ -22,15 +23,16 @@ use rp2040_hal::{
 
 #[entry]
 fn main() -> ! {
-    info!("Program start");
+    info!("Detection system startup");
     let mut pac = pac::Peripherals::take().unwrap();
     let core = pac::CorePeripherals::take().unwrap();
     let mut watchdog = Watchdog::new(pac.WATCHDOG);
     let sio = Sio::new(pac.SIO);
+    let startup_fsm = Startup::new();
 
     // External high-speed crystal on the pico board is 12Mhz
     let external_xtal_freq_hz = 12_000_000u32;
-    let clocks = init_clocks_and_plls(
+    let mut clocks = init_clocks_and_plls(
         external_xtal_freq_hz,
         pac.XOSC,
         pac.CLOCKS,
@@ -41,6 +43,21 @@ fn main() -> ! {
     )
     .ok()
     .unwrap();
+
+    // Attempt to switch system to 24 MHz for efficiency
+    clocks
+        .system_clock
+        .configure_clock(&clocks.reference_clock, SYS_CLOCK_FREQ.into())
+        .unwrap_or_else(|err| {
+            warn!(
+                "Unable to downscale clock speed: {}\nClocks will continue to run at {}",
+                err,
+                clocks.system_clock.freq()
+            )
+        });
+
+    init_components(&startup_fsm);
+    todo!();
 
     let mut delay = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
