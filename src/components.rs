@@ -1,12 +1,10 @@
 use embedded_hal::digital::PinState;
 use embedded_hal::pwm::SetDutyCycle;
-use rp2040_hal::clocks::ClocksManager;
 use rp2040_hal::gpio::{
     bank0::{Gpio22, Gpio6, Gpio7, Gpio8, Gpio9},
     FunctionNull, FunctionSio, Pin, PullDown, SioInput, SioOutput,
 };
 use rp2040_hal::pwm::{Channel, FreeRunning, Pwm3, Slice, A};
-use rp2040_hal::Clock;
 
 /// Switch which will interrupt operations and put system in [`Disabled`](crate::states::Disabled) state.
 pub type DisableSwitch = Pin<Gpio9, FunctionSio<SioInput>, PullDown>;

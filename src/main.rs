@@ -3,24 +3,29 @@
 #![no_std]
 #![no_main]
 
-mod components;
-mod states;
-
 use defmt::{info, warn};
 #[allow(unused_imports)]
 use defmt_rtt as _;
 #[allow(unused_imports)]
 use panic_probe as _;
+use rp2040_hal::{
+    clocks::init_clocks_and_plls, dma::DMAExt, entry, fugit::RateExtU32, gpio::Pins, pac,
+    prelude::*, pwm::Slices, sio::Sio, watchdog::Watchdog, Adc,
+};
 
-use crate::components::{SignalGenPwm, StatusLeds};
-use rp2040_hal::gpio::Pins;
-use rp2040_hal::pwm::Slices;
-use rp2040_hal::{Adc, clocks::init_clocks_and_plls, entry, fugit::RateExtU32, pac, prelude::*, sio::Sio, watchdog::Watchdog};
-use rp2040_hal::dma::DMAExt;
-use states::{Startup, SYS_CLOCK_FREQ};
+use crate::{
+    buffer::Buffers,
+    components::{SignalGenPwm, StatusLeds},
+    states::{Startup, SYS_CLOCK_FREQ},
+};
 
-/// Target 200 kHz (2x output freq) for signal generation
-static TARGET_TOP_FREQ_KHZ: u16 = 200;
+mod buffer;
+mod components;
+mod states;
+
+/// Frequency of detection signal is 100 kHz
+static SIGNAL_FREQ_KHZ: u32 = 100;
+static mut BUFFERS: Buffers = Buffers::default();
 
 #[entry]
 fn main() -> ! {
@@ -56,7 +61,7 @@ fn main() -> ! {
             )
         });
 
-    // Initialize components
+    // Initialize signal generator
     let pins = Pins::new(
         pac.IO_BANK0,
         pac.PADS_BANK0,
@@ -66,35 +71,30 @@ fn main() -> ! {
     let mut pwm_slices = Slices::new(pac.PWM, &mut pac.RESETS);
     pwm_slices
         .pwm3
-        .set_top((clocks.system_clock.freq().to_kHz() as u16 / TARGET_TOP_FREQ_KHZ) - 1);
+        // Ex. 24 MHz clock generates 100 kHz signal ->  240 ticks per PWM cycle (`top`)
+        // with 50% duty cycle
+        .set_top(((clocks.system_clock.freq().to_kHz() / SIGNAL_FREQ_KHZ) - 1) as u16);
+
     
     let mut adc = Adc::new(pac.ADC, &mut pac.RESETS);
     let mut adc_pin0 = rp2040_hal::adc::AdcPin::new(pins.gpio26.into_floating_input()).unwrap();
     let mut dma = pac.DMA.split(&mut pac.RESETS);
-    let mut readings_fifo = adc.build_fifo()
+    let mut readings_fifo = adc
+        .build_fifo()
         .set_channel(&mut adc_pin0)
-        // Ex. 24 MHz samples
-        .clock_divider((clocks.system_clock.freq().to_kHz() as u16 / (TARGET_TOP_FREQ_KHZ/4)) - 1, 0)
+        // Ex. 24 MHz clock at 200 ksamples/s (2x SIGNAL_FREQ_KHZ) -> sample every 120 ticks
+        .clock_divider(
+            ((clocks.system_clock.freq().to_kHz() / (2 * SIGNAL_FREQ_KHZ)) - 1) as u16,
+            0,
+        )
         .shift_8bit()
         .enable_dma()
         .start_paused();
-    
+
     startup_fsm.init_components(
         pins.gpio9.into_pull_down_input(),
         StatusLeds::init(pins.gpio6, pins.gpio7, pins.gpio8),
         SignalGenPwm::init(pwm_slices.pwm3.channel_a, pins.gpio22),
     );
     todo!();
-
-    // This is the correct pin on the Raspberry Pico board. On other boards, even if they have an
-    // on-board LED, it might need to be changed.
-    //
-    // Notably, on the Pico W, the LED is not connected to any of the RP2040 GPIOs but to the cyw43 module instead.
-    // One way to do that is by using [embassy](https://github.com/embassy-rs/embassy/blob/main/examples/rp/src/bin/wifi_blinky.rs)
-    //
-    // If you have a Pico W and want to toggle a LED with a simple GPIO output pin, you can connect an external
-    // LED to one of the GPIO pins, and reference that pin here. Don't forget adding an appropriate resistor
-    // in series with the LED.
 }
-
-// End of file
