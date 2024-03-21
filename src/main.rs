@@ -27,6 +27,7 @@ pub mod buffer;
 pub mod components;
 pub mod states;
 
+/// Second-stage bootloader, from [rp2040-boot2](https://docs.rs/rp2040-boot2)
 #[link_section = ".boot2"]
 #[used]
 pub static BOOT2: [u8; 256] = rp2040_boot2::BOOT_LOADER_W25Q080;
@@ -42,6 +43,7 @@ pub static DISABLE_SWITCH: Mutex<RefCell<Option<DisableSwitch>>> = Mutex::new(Re
 /// See [`Buffers`]
 pub static mut BUFFERS: Buffers = Buffers::init();
 
+/// Initializes main system, in [`states::Startup`]
 #[entry]
 fn main() -> ! {
     info!("Detection system startup");

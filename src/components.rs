@@ -29,10 +29,15 @@ impl DisableSwitch {
     }
 }
 
-/// Green, yellow, and red LED which display system status
+/// LEDs which display system status
 pub struct StatusLeds {
+    /// Green LED, for [`Active`](crate::states::Active) and
+    /// [`PotentialContact`](crate::states::PotentialContact)
     good_led: Pin<Gpio6, FunctionSio<SioOutput>, PullDown>,
+    /// Yellow LED, for [`Startup`](crate::states::Startup) and
+    /// [`ConfirmedContact`](crate::states::ConfirmedContact)
     alert_led: Pin<Gpio7, FunctionSio<SioOutput>, PullDown>,
+    /// Red LED, for [`Error`](crate::states::Error)
     error_led: Pin<Gpio8, FunctionSio<SioOutput>, PullDown>,
 }
 
@@ -52,6 +57,7 @@ impl StatusLeds {
 
 /// Generates a 100 kHz signal for contact detection.
 pub struct SignalGenPwm {
+    /// PWM channel 3A, connects to [`Gpio22`]
     pwm3a: Channel<Slice<Pwm3, FreeRunning>, A>,
 }
 
@@ -66,7 +72,7 @@ impl SignalGenPwm {
     }
 }
 
-/// ISR for GPIO pins
+/// ISR for SysTick, used for checking [`DisableSwitch`] with debouncing
 ///
 /// Lazily takes ownership of [`DISABLE_SWITCH`] as it will not be used again in the main runtime again.
 #[exception]

@@ -1,3 +1,5 @@
+//! Sample buffering, storage, and comparison
+
 /// Custom type for comparing signal samples
 #[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub struct SampleStamp(u32);
@@ -8,7 +10,7 @@ impl SampleStamp {
     }
 }
 
-/// Various buffers used for managing
+/// Various buffers used for managing signal samples
 pub struct Buffers {
     /// Records 2 ms of samples to calculate average voltage change of the signal
     pub avg_buffer: [u8; 4000],
@@ -21,6 +23,7 @@ pub struct Buffers {
 }
 
 impl Buffers {
+    /// Initializes static buffers for [`crate::BUFFERS`]
     pub const fn init() -> Self {
         Self {
             avg_buffer: [0u8; 4000],
