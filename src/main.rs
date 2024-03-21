@@ -15,14 +15,12 @@ use panic_probe as _;
 use crate::components::{SignalGenPwm, StatusLeds};
 use rp2040_hal::gpio::Pins;
 use rp2040_hal::pwm::Slices;
-use rp2040_hal::{
-    clocks::init_clocks_and_plls, entry, fugit::RateExtU32, pac, prelude::*, sio::Sio,
-    watchdog::Watchdog,
-};
+use rp2040_hal::{Adc, clocks::init_clocks_and_plls, entry, fugit::RateExtU32, pac, prelude::*, sio::Sio, watchdog::Watchdog};
+use rp2040_hal::dma::DMAExt;
 use states::{Startup, SYS_CLOCK_FREQ};
 
-/// Target 200 kHz (2x freq) for signal generation
-const TARGET_TOP_FREQ_KHZ: u16 = 200;
+/// Target 200 kHz (2x output freq) for signal generation
+static TARGET_TOP_FREQ_KHZ: u16 = 200;
 
 #[entry]
 fn main() -> ! {
@@ -68,8 +66,19 @@ fn main() -> ! {
     let mut pwm_slices = Slices::new(pac.PWM, &mut pac.RESETS);
     pwm_slices
         .pwm3
-        .set_top(clocks.system_clock.freq().to_kHz() as u16 / TARGET_TOP_FREQ_KHZ);
-
+        .set_top((clocks.system_clock.freq().to_kHz() as u16 / TARGET_TOP_FREQ_KHZ) - 1);
+    
+    let mut adc = Adc::new(pac.ADC, &mut pac.RESETS);
+    let mut adc_pin0 = rp2040_hal::adc::AdcPin::new(pins.gpio26.into_floating_input()).unwrap();
+    let mut dma = pac.DMA.split(&mut pac.RESETS);
+    let mut readings_fifo = adc.build_fifo()
+        .set_channel(&mut adc_pin0)
+        // Ex. 24 MHz samples
+        .clock_divider((clocks.system_clock.freq().to_kHz() as u16 / (TARGET_TOP_FREQ_KHZ/4)) - 1, 0)
+        .shift_8bit()
+        .enable_dma()
+        .start_paused();
+    
     startup_fsm.init_components(
         pins.gpio9.into_pull_down_input(),
         StatusLeds::init(pins.gpio6, pins.gpio7, pins.gpio8),
