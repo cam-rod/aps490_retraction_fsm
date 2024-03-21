@@ -1,46 +1,31 @@
 //! I/O components, including all interrupts
-use embedded_hal::{digital::PinState, pwm::SetDutyCycle};
+use cortex_m_rt::exception;
+use defmt::warn;
+use embedded_hal::{
+    digital::{InputPin, PinState},
+    pwm::SetDutyCycle,
+};
 use rp2040_hal::{
     gpio::{
         bank0::{Gpio22, Gpio6, Gpio7, Gpio8, Gpio9},
-        FunctionNull, FunctionSio, Interrupt, Pin, PullDown, SioInput, SioOutput,
+        FunctionNull, FunctionSio, Pin, PullDown, SioInput, SioOutput,
     },
-    pac::interrupt,
     pwm::{Channel, FreeRunning, Pwm3, Slice, A},
 };
-use rp2040_hal::gpio::Interrupt::EdgeHigh;
 
-use crate::DISABLE_SWTICH;
+use crate::DISABLE_SWITCH;
 
 /// Switch which will interrupt operations and put system in [`Disabled`](crate::states::Disabled) state.
 pub struct DisableSwitch(Pin<Gpio9, FunctionSio<SioInput>, PullDown>);
 
 impl DisableSwitch {
-    /// Configures disable switch and interrupt
+    /// Configures disable switch, and places in [`DISABLE_SWITCH`]
     pub fn configure(gpio9: Pin<Gpio9, FunctionNull, PullDown>) {
         let switch = gpio9.into_pull_down_input();
-        switch.set_interrupt_enabled(Interrupt::EdgeHigh, true);
-        critical_section::with(|cs| {
-            DISABLE_SWTICH.borrow(cs).replace(Some(Self(switch)));
-        });
-    }
-}
 
-/// ISR for GPIO pins
-///
-/// Lazily takes ownership of [`DISABLE_SWTICH`] as it will not be used again in the main runtime again.
-#[interrupt]
-fn IO_IRQ_BANK0() {
-    static mut DISABLE_SWITCH_IRQ: Option<DisableSwitch> = None;
-
-    if DISABLE_SWITCH_IRQ.is_none() {
         critical_section::with(|cs| {
-            *DISABLE_SWITCH_IRQ = DISABLE_SWTICH.borrow(cs).take();
+            DISABLE_SWITCH.borrow(cs).replace(Some(Self(switch)));
         });
-    }
-    
-    if let Some(switch) = DISABLE_SWITCH_IRQ {
-        if switch.0.interrupt_status(EdgeHigh)
     }
 }
 
@@ -78,5 +63,48 @@ impl SignalGenPwm {
         pwm3a.output_to(gpio22);
         pwm3a.set_duty_cycle_percent(50u8).unwrap();
         Self { pwm3a }
+    }
+}
+
+/// ISR for GPIO pins
+///
+/// Lazily takes ownership of [`DISABLE_SWITCH`] as it will not be used again in the main runtime again.
+#[exception]
+fn SysTick() {
+    static mut DISABLE_SWITCH_IRQ: Option<DisableSwitch> = None;
+    static mut SWITCH_DEBOUNCED: bool = false;
+    // TODO: replace with state machine
+    static mut IS_DISABLED: bool = false;
+
+    if DISABLE_SWITCH_IRQ.is_none() {
+        critical_section::with(|cs| {
+            *DISABLE_SWITCH_IRQ = DISABLE_SWITCH.borrow(cs).take();
+        });
+    }
+
+    if let Some(switch) = DISABLE_SWITCH_IRQ {
+        // TODO: redirect to Error state if unable to disable switch state
+        if switch
+            .0
+            .is_high()
+            .expect("Unable to check disable switch state")
+        {
+            if SWITCH_DEBOUNCED == &false {
+                *SWITCH_DEBOUNCED = true;
+            } else {
+                // TODO: replace with FSM
+                *SWITCH_DEBOUNCED = false;
+                match IS_DISABLED {
+                    false => {
+                        warn!("System disabled");
+                        *IS_DISABLED = true
+                    }
+                    true => {
+                        warn!("System enabled");
+                        *IS_DISABLED = false
+                    }
+                }
+            }
+        }
     }
 }
