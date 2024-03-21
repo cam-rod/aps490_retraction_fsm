@@ -1,13 +1,48 @@
-use embedded_hal::digital::PinState;
-use embedded_hal::pwm::SetDutyCycle;
-use rp2040_hal::gpio::{
-    bank0::{Gpio22, Gpio6, Gpio7, Gpio8, Gpio9},
-    FunctionNull, FunctionSio, Pin, PullDown, SioInput, SioOutput,
+//! I/O components, including all interrupts
+use embedded_hal::{digital::PinState, pwm::SetDutyCycle};
+use rp2040_hal::{
+    gpio::{
+        bank0::{Gpio22, Gpio6, Gpio7, Gpio8, Gpio9},
+        FunctionNull, FunctionSio, Interrupt, Pin, PullDown, SioInput, SioOutput,
+    },
+    pac::interrupt,
+    pwm::{Channel, FreeRunning, Pwm3, Slice, A},
 };
-use rp2040_hal::pwm::{Channel, FreeRunning, Pwm3, Slice, A};
+use rp2040_hal::gpio::Interrupt::EdgeHigh;
+
+use crate::DISABLE_SWTICH;
 
 /// Switch which will interrupt operations and put system in [`Disabled`](crate::states::Disabled) state.
-pub type DisableSwitch = Pin<Gpio9, FunctionSio<SioInput>, PullDown>;
+pub struct DisableSwitch(Pin<Gpio9, FunctionSio<SioInput>, PullDown>);
+
+impl DisableSwitch {
+    /// Configures disable switch and interrupt
+    pub fn configure(gpio9: Pin<Gpio9, FunctionNull, PullDown>) {
+        let switch = gpio9.into_pull_down_input();
+        switch.set_interrupt_enabled(Interrupt::EdgeHigh, true);
+        critical_section::with(|cs| {
+            DISABLE_SWTICH.borrow(cs).replace(Some(Self(switch)));
+        });
+    }
+}
+
+/// ISR for GPIO pins
+///
+/// Lazily takes ownership of [`DISABLE_SWTICH`] as it will not be used again in the main runtime again.
+#[interrupt]
+fn IO_IRQ_BANK0() {
+    static mut DISABLE_SWITCH_IRQ: Option<DisableSwitch> = None;
+
+    if DISABLE_SWITCH_IRQ.is_none() {
+        critical_section::with(|cs| {
+            *DISABLE_SWITCH_IRQ = DISABLE_SWTICH.borrow(cs).take();
+        });
+    }
+    
+    if let Some(switch) = DISABLE_SWITCH_IRQ {
+        if switch.0.interrupt_status(EdgeHigh)
+    }
+}
 
 /// Green, yellow, and red LED which display system status
 pub struct StatusLeds {

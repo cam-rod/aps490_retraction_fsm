@@ -1,13 +1,5 @@
 //! FSM and transitions for the detection mechanism.
-
-use crate::components::{DisableSwitch, SignalGenPwm, StatusLeds};
-use embedded_hal::digital::PinState;
-use rp2040_hal::gpio::Pins;
-use rp2040_hal::pac::{IO_BANK0, PADS_BANK0, RESETS};
-use rp2040_hal::pwm::{FreeRunning, Pwm4, Slice};
-use rp2040_hal::sio::SioGpioBank0;
-
-pub const SYS_CLOCK_FREQ: u32 = 12_000_000;
+use crate::components::{SignalGenPwm, StatusLeds};
 
 /// States which can transition into [`Active`]
 pub trait InitState {}
@@ -17,8 +9,8 @@ pub trait StandbyState {}
 pub trait AlertState {}
 
 /// System is initializing clocks and components
+#[derive(Default)]
 pub struct Startup {
-    disable_switch: Option<DisableSwitch>,
     status_leds: Option<StatusLeds>,
     signal_gen: Option<SignalGenPwm>,
 }
@@ -45,23 +37,8 @@ impl AlertState for ConfirmedContact {}
 pub struct Error;
 
 impl Startup {
-    /// Create FSM with ownership of peripherals, initialize clocks with 12 Mh
-    pub fn new() -> Self {
-        Self {
-            disable_switch: None,
-            status_leds: None,
-            signal_gen: None,
-        }
-    }
-
     // Stores disable switch, LEDs, and signal gen pins in FSM
-    pub fn init_components(
-        &mut self,
-        disable_switch: DisableSwitch,
-        status_leds: StatusLeds,
-        signal_gen: SignalGenPwm,
-    ) {
-        self.disable_switch = Some(disable_switch);
+    pub fn init_components(&mut self, status_leds: StatusLeds, signal_gen: SignalGenPwm) {
         // Warning status while system is initialized
         self.status_leds = Some(status_leds);
         self.signal_gen = Some(signal_gen);
