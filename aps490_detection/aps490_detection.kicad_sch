@@ -5,7 +5,9 @@
   (paper "A4")
 
   (title_block
-    (title "Detection Mechanism")
+    (title "Autopsy Saw Detection Mechanism")
+    (date "2024-03-24")
+    (rev "3")
     (company "PFPU2")
   )
 
@@ -25,7 +27,7 @@
     )
     (instances
       (project "aps490_detection"
-        (path "/e118c919-9296-4265-a7f4-7c13f94290b1" (page "5"))
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1" (page "2"))
       )
     )
   )
