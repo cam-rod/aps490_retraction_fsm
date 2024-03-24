@@ -15536,6 +15536,12 @@
   (junction (at 165.1 83.82) (diameter 0) (color 0 0 0 0)
     (uuid 0cc1d710-cb85-4eb1-8936-4bbb9daf4b9e)
   )
+  (junction (at 177.8 81.28) (diameter 0) (color 0 0 0 0)
+    (uuid 62aa952e-5868-4956-b796-dd43dd460ad6)
+  )
+  (junction (at 175.26 81.28) (diameter 0) (color 0 0 0 0)
+    (uuid 72f77fac-e91b-4bcb-8193-95121d9a158a)
+  )
   (junction (at 109.22 83.82) (diameter 0) (color 0 0 0 0)
     (uuid 8d4416d2-75da-4cae-ba82-15b04cf1d529)
   )
@@ -15585,6 +15591,10 @@
   (wire (pts (xy 160.02 109.22) (xy 160.02 111.76))
     (stroke (width 0.1524) (type solid))
     (uuid 271deba9-2dfa-4f88-a80d-fc7353aedc37)
+  )
+  (wire (pts (xy 175.26 59.69) (xy 175.26 81.28))
+    (stroke (width 0) (type default))
+    (uuid 2ac65724-f7c3-4d81-b5f6-8313ee72f821)
   )
   (wire (pts (xy 154.94 114.3) (xy 154.94 111.76))
     (stroke (width 0.1524) (type solid))
@@ -15663,6 +15673,10 @@
   (wire (pts (xy 93.98 93.98) (xy 91.44 93.98))
     (stroke (width 0.1524) (type solid))
     (uuid accd12ec-c596-4af3-aeef-045d94c7519f)
+  )
+  (wire (pts (xy 177.8 59.69) (xy 177.8 81.28))
+    (stroke (width 0) (type default))
+    (uuid b7190e7b-e23c-4e1a-a4a9-dbbf27171e6a)
   )
   (wire (pts (xy 200.66 81.28) (xy 200.66 86.36))
     (stroke (width 0.1524) (type solid))
@@ -15747,6 +15761,15 @@
     (uuid 96a6422d-4116-4f6d-aa42-8bf90295cc94)
   )
 
+  (hierarchical_label "CHG_GND" (shape input) (at 177.8 59.69 90) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 2d176002-1925-4030-aa00-4749bae490fa)
+  )
+  (hierarchical_label "CHG_VBAT" (shape output) (at 175.26 59.69 90) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 405ec79f-e89a-4e76-9a4a-5d93353121d6)
+  )
+
   (symbol (lib_id "SparkFun_Lipo_Charger_Basic-microUSB-eagle-import:USB-ABCONN-11794") (at 86.36 88.9 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1b10dc98-5ee4-49cd-b4b5-3399de03d6a8)
@@ -15773,6 +15796,11 @@
           (reference "JP9") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
+          (reference "JP9") (unit 1)
+        )
+      )
     )
   )
 
@@ -15794,6 +15822,11 @@
     (instances
       (project "SparkFun_Lipo_Charger_Basic-microUSB"
         (path "/342e9741-5281-407b-be73-39ccad418930"
+          (reference "JP2") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
           (reference "JP2") (unit 1)
         )
       )
@@ -15823,6 +15856,11 @@
           (reference "R4") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
+          (reference "R4") (unit 1)
+        )
+      )
     )
   )
 
@@ -15845,6 +15883,11 @@
     (instances
       (project "SparkFun_Lipo_Charger_Basic-microUSB"
         (path "/342e9741-5281-407b-be73-39ccad418930"
+          (reference "#GND17") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
           (reference "#GND17") (unit 1)
         )
       )
@@ -15871,6 +15914,11 @@
     (instances
       (project "SparkFun_Lipo_Charger_Basic-microUSB"
         (path "/342e9741-5281-407b-be73-39ccad418930"
+          (reference "R3") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
           (reference "R3") (unit 1)
         )
       )
@@ -15903,6 +15951,11 @@
           (reference "U1") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
+          (reference "U1") (unit 1)
+        )
+      )
     )
   )
 
@@ -15929,6 +15982,11 @@
           (reference "D11") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
+          (reference "D11") (unit 1)
+        )
+      )
     )
   )
 
@@ -15951,6 +16009,11 @@
     (instances
       (project "SparkFun_Lipo_Charger_Basic-microUSB"
         (path "/342e9741-5281-407b-be73-39ccad418930"
+          (reference "#GND1") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
           (reference "#GND1") (unit 1)
         )
       )
@@ -15980,6 +16043,11 @@
           (reference "C3") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
+          (reference "C3") (unit 1)
+        )
+      )
     )
   )
 
@@ -16001,6 +16069,11 @@
     (instances
       (project "SparkFun_Lipo_Charger_Basic-microUSB"
         (path "/342e9741-5281-407b-be73-39ccad418930"
+          (reference "LOGO1") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
           (reference "LOGO1") (unit 1)
         )
       )
@@ -16026,6 +16099,11 @@
     (instances
       (project "SparkFun_Lipo_Charger_Basic-microUSB"
         (path "/342e9741-5281-407b-be73-39ccad418930"
+          (reference "#GND2") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
           (reference "#GND2") (unit 1)
         )
       )
@@ -16055,6 +16133,11 @@
           (reference "JP8") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
+          (reference "JP8") (unit 1)
+        )
+      )
     )
   )
 
@@ -16076,6 +16159,11 @@
     (instances
       (project "SparkFun_Lipo_Charger_Basic-microUSB"
         (path "/342e9741-5281-407b-be73-39ccad418930"
+          (reference "FRAME1") (unit 2)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
           (reference "FRAME1") (unit 2)
         )
       )
@@ -16104,6 +16192,11 @@
           (reference "#GND18") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
+          (reference "#GND18") (unit 1)
+        )
+      )
     )
   )
 
@@ -16129,6 +16222,11 @@
           (reference "#GND14") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
+          (reference "#GND14") (unit 1)
+        )
+      )
     )
   )
 
@@ -16151,6 +16249,11 @@
     (instances
       (project "SparkFun_Lipo_Charger_Basic-microUSB"
         (path "/342e9741-5281-407b-be73-39ccad418930"
+          (reference "#GND19") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
           (reference "#GND19") (unit 1)
         )
       )
@@ -16180,6 +16283,11 @@
           (reference "C4") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
+          (reference "C4") (unit 1)
+        )
+      )
     )
   )
 
@@ -16204,6 +16312,11 @@
           (reference "JP4") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
+          (reference "JP4") (unit 1)
+        )
+      )
     )
   )
 
@@ -16225,6 +16338,11 @@
     (instances
       (project "SparkFun_Lipo_Charger_Basic-microUSB"
         (path "/342e9741-5281-407b-be73-39ccad418930"
+          (reference "LOGO2") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
           (reference "LOGO2") (unit 1)
         )
       )
@@ -16253,6 +16371,11 @@
           (reference "#GND15") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
+          (reference "#GND15") (unit 1)
+        )
+      )
     )
   )
 
@@ -16274,6 +16397,11 @@
     (instances
       (project "SparkFun_Lipo_Charger_Basic-microUSB"
         (path "/342e9741-5281-407b-be73-39ccad418930"
+          (reference "FRAME1") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
           (reference "FRAME1") (unit 1)
         )
       )
@@ -16305,6 +16433,11 @@
           (reference "JP1") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
+          (reference "JP1") (unit 1)
+        )
+      )
     )
   )
 
@@ -16326,6 +16459,11 @@
     (instances
       (project "SparkFun_Lipo_Charger_Basic-microUSB"
         (path "/342e9741-5281-407b-be73-39ccad418930"
+          (reference "JP3") (unit 1)
+        )
+      )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
           (reference "JP3") (unit 1)
         )
       )
@@ -16355,10 +16493,11 @@
           (reference "R1") (unit 1)
         )
       )
+      (project "aps490_detection"
+        (path "/e118c919-9296-4265-a7f4-7c13f94290b1/bad03448-3ebc-42d0-be48-dd19294cc20c/0189be23-f30a-49a0-a245-8d28dabd251c"
+          (reference "R1") (unit 1)
+        )
+      )
     )
-  )
-
-  (sheet_instances
-    (path "/" (page "1"))
   )
 )

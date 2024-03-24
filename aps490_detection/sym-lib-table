@@ -2,4 +2,6 @@
   (version 7)
   (lib (name "ST_LINK_V2-1-SCHDOC-rescue")(type "KiCad")(uri "/home/camrod/develop/aps490_retraction_fsm/MB1180/ST_LINK_V2-1-SCHDOC-rescue.kicad_sym")(options "")(descr ""))
   (lib (name "MCU_32-SchDoc-rescue")(type "KiCad")(uri "/home/camrod/develop/aps490_retraction_fsm/MB1180/MCU_32-SchDoc-rescue.kicad_sym")(options "")(descr ""))
+  (lib (name "Lipo-Charger")(type "KiCad")(uri "/home/camrod/develop/aps490_retraction_fsm/SparkFun_Lipo_Charger_Basic-microUSB/SparkFun_Lipo_Charger_Basic-microUSB-eagle-import.kicad_sym")(options "")(descr ""))
+  (lib (name "SparkFun_Lipo_Charger_Basic-microUSB-eagle-import")(type "KiCad")(uri "/home/camrod/develop/aps490_retraction_fsm/SparkFun_Lipo_Charger_Basic-microUSB/SparkFun_Lipo_Charger_Basic-microUSB-eagle-import.kicad_sym")(options "")(descr ""))
 )
