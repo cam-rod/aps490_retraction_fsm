@@ -10,10 +10,11 @@ use rp2040_hal::{
         bank0::{Gpio22, Gpio6, Gpio7, Gpio8, Gpio9},
         FunctionNull, FunctionSio, Pin, PullDown, SioInput, SioOutput,
     },
+    pac::interrupt,
     pwm::{Channel, FreeRunning, Pwm3, Slice, A},
 };
 
-use crate::DISABLE_SWITCH;
+use crate::{Readings, ADC_READINGS, DISABLE_SWITCH};
 
 /// Switch which will interrupt operations and put system in [`Disabled`](crate::states::Disabled) state.
 pub struct DisableSwitch(Pin<Gpio9, FunctionSio<SioInput>, PullDown>);
@@ -109,5 +110,18 @@ fn SysTick() {
                 }
             }
         }
+    }
+}
+
+/// ISR for ADC readings
+#[interrupt]
+fn DMA_IRQ_0() {
+    static mut ADC_READINGS_IRQ: Option<Readings> = None;
+    if ADC_READINGS_IRQ.is_none() {
+        critical_section::with(|cs| *ADC_READINGS_IRQ = ADC_READINGS.borrow(cs).take());
+    }
+    
+    if let Some(readings) = ADC_READINGS_IRQ {
+        let (_ch, _adc_read_target, buf_for_samples) = readings.2.unwrap().wait();
     }
 }

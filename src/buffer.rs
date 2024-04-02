@@ -1,5 +1,7 @@
 //! Sample buffering, storage, and comparison
 
+use cortex_m::singleton;
+
 /// Custom type for comparing signal samples
 #[derive(Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub struct SampleStamp(u32);
@@ -12,8 +14,6 @@ impl SampleStamp {
 
 /// Various buffers used for managing signal samples
 pub struct Buffers {
-    /// Records 2 ms of samples to calculate average voltage change of the signal
-    pub avg_buffer: [u8; 4000],
     /// Records up to 90 s of average samples to determine if a detection event occurred
     pub longterm_buffer: [u8; 45000],
     /// Counter for the most recent sample added to
@@ -26,10 +26,14 @@ impl Buffers {
     /// Initializes static buffers for [`crate::BUFFERS`]
     pub const fn init() -> Self {
         Self {
-            avg_buffer: [0u8; 4000],
             longterm_buffer: [0u8; 45000],
             current_sample: SampleStamp::new(),
             detection_events: [SampleStamp::new(); 10],
         }
+    }
+    
+    /// Works with [`Buffers`] for DMA readings
+    pub fn create_avg_buffer() -> &'static mut [u8; 4000] {
+        singleton!(: [u8; 4000] = [0u8;4000]).unwrap()
     }
 }

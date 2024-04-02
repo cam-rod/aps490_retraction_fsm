@@ -3,6 +3,8 @@
 #![no_std]
 #![no_main]
 
+extern crate alloc;
+
 use core::cell::RefCell;
 
 use cortex_m::peripheral::syst::SystClkSource;
@@ -12,8 +14,10 @@ use defmt::{info, warn};
 use defmt_rtt as _;
 #[allow(unused_imports)]
 use panic_probe as _;
+use rp2040_hal::adc::{AdcFifo, DmaReadTarget};
+use rp2040_hal::dma::SingleChannel;
 use rp2040_hal::{
-    clocks::init_clocks_and_plls, dma::DMAExt, entry, fugit::RateExtU32, gpio::Pins, pac,
+    clocks::init_clocks_and_plls, dma, dma::DMAExt, entry, fugit::RateExtU32, gpio::Pins, pac,
     prelude::*, pwm::Slices, sio::Sio, watchdog::Watchdog, Adc,
 };
 
@@ -40,10 +44,31 @@ pub static SIGNAL_GEN_FREQ_HZ: u32 = 100_000;
 
 /// See [`DisableSwitch`]
 pub static DISABLE_SWITCH: Mutex<RefCell<Option<DisableSwitch>>> = Mutex::new(RefCell::new(None));
+
+
+type Readings = (
+    AdcFifo<'static, u8>,
+    &'static mut [u8; 4000],
+    Option<dma::single_buffer::Transfer<
+        dma::Channel<dma::CH0>,
+        DmaReadTarget<u8>,
+        &'static mut [u8; 4000],
+    >>,
+)
+/// Transfer ownership of readings buffer to IRQ. See [`AvgBuffer`]
+pub static ADC_READINGS: Mutex<
+    RefCell<
+        Option<Readings>,
+    >,
+> = Mutex::new(RefCell::new(None));
+
 /// See [`Buffers`]
 pub static mut BUFFERS: Buffers = Buffers::init();
+/// See [`AvgBuffer`]
+pub static mut AVG_BUFFER: Option<&'static mut [u8; 4000]> = None;
 
 /// Initializes main system, in [`states::Startup`]
+
 #[entry]
 fn main() -> ! {
     info!("Detection system startup");
@@ -91,9 +116,9 @@ fn main() -> ! {
         .set_top(((clocks.system_clock.freq().to_Hz() / SIGNAL_GEN_FREQ_HZ) - 1) as u16);
 
     // Initialize ADC
+    let avg_buffer = Buffers::create_avg_buffer();
     let mut adc = Adc::new(pac.ADC, &mut pac.RESETS);
     let mut adc_pin0 = rp2040_hal::adc::AdcPin::new(pins.gpio26.into_floating_input()).unwrap();
-    let mut dma = pac.DMA.split(&mut pac.RESETS);
     let mut readings_fifo = adc
         .build_fifo()
         .set_channel(&mut adc_pin0)
@@ -105,6 +130,21 @@ fn main() -> ! {
         .shift_8bit()
         .enable_dma()
         .start_paused();
+    let mut dma = pac.DMA.split(&mut pac.RESETS);
+    let init_readings_dma =
+        dma::single_buffer::Config::new(dma.ch0, readings_fifo.dma_read_target(), avg_buffer)
+            .start();
+    critical_section::with(|cs| {
+        // Load variables into mutex, and then start the ADC readings
+        ADC_READINGS
+            .borrow(cs)
+            .replace(Some((readings_fifo, avg_buffer, Some(init_readings_dma))))
+            .as_mut()
+            .unwrap()
+            .0
+            .resume();
+    });
+    dma.ch0.enable_irq0();
 
     startup_fsm.init_components(
         StatusLeds::init(pins.gpio6, pins.gpio7, pins.gpio8),
@@ -119,4 +159,6 @@ fn main() -> ! {
     sys_tick.clear_current();
     sys_tick.enable_interrupt();
     sys_tick.enable_counter();
+    
+    loop {}
 }
