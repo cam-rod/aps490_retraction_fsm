@@ -119,6 +119,4 @@ fn main() -> ! {
     sys_tick.clear_current();
     sys_tick.enable_interrupt();
     sys_tick.enable_counter();
-
-    todo!();
 }

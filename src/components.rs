@@ -79,7 +79,6 @@ impl SignalGenPwm {
 fn SysTick() {
     static mut DISABLE_SWITCH_IRQ: Option<DisableSwitch> = None;
     static mut SWITCH_DEBOUNCED: bool = false;
-    // TODO: replace with state machine
     static mut IS_DISABLED: bool = false;
 
     if DISABLE_SWITCH_IRQ.is_none() {
@@ -89,7 +88,6 @@ fn SysTick() {
     }
 
     if let Some(switch) = DISABLE_SWITCH_IRQ {
-        // TODO: redirect to Error state if unable to disable switch state
         if switch
             .0
             .is_high()
@@ -98,7 +96,6 @@ fn SysTick() {
             if SWITCH_DEBOUNCED == &false {
                 *SWITCH_DEBOUNCED = true;
             } else {
-                // TODO: replace with FSM
                 *SWITCH_DEBOUNCED = false;
                 match IS_DISABLED {
                     false => {
